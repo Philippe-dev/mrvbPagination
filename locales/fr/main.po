@@ -1,0 +1,21 @@
+# ----------------------------------------
+# French translation of mrvbPagination
+# © Mirovinben (http://www.mirovinben.fr/)
+# ----------------------------------------
+msgid ""
+msgstr ""
+
+msgid "This page"
+msgstr "Cette page"
+
+msgid "Bloc of %s pages before"
+msgstr "Bloc de %s pages précédent"
+
+msgid "Go to page"
+msgstr "Aller à la page"
+
+msgid "Pages:"
+msgstr "Pages&nbsp;:"
+
+msgid "Bloc of %s pages after"
+msgstr "Bloc de %s pages suivant"

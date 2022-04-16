@@ -1,0 +1,94 @@
+# -- BEGIN LICENSE BLOCK ----------------------------------
+#
+# This file is part of mrvbPagination, a plugin for Dotclear 2
+#
+# © Mirovinben (http://www.mirovinben.fr/)
+# Licensed under the GPL version 2.0 license.
+# See LICENSE file or
+# http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+#
+# -- END LICENSE BLOCK ------------------------------------
+
+Plugin écrit d'après un exemple proposé par Fix sur le forum Dotclear
+intégré et enrichi par Topaz dans le plugin "advancedPagination"
+qui propose le marqueur de template {{tpl:PaginationLinks}}.
+
+Ce marqueur donne un accès direct à la première page, à la dernière page
+et affiche si nécessaire un groupe de liens
+pour accéder aux "x" pages avant et aux "x" pages après la page courante.
+
+Mise en œuvre :
+
+Remplacer l'intégralité du bloc
+	<tpl:Pagination>(...)</tpl:Pagination>
+par
+	<tpl:Pagination>{{tpl:PaginationLinks}}</tpl:Pagination>
+dans tous les fichiers du thème qui affichent une liste de billets : category.html, home.html, search.html et tag.html.
+
+=============
+
+mrvbPagination enrichit l'usage de {{tpl:PaginationLinks}} grâce à :
+
+	- jump   : nombre de pages composant le groupe de liens (7 par défaut)
+	- before : texte cliquable pour aller au groupe précédent("<" par défaut) 
+	- after  : texte cliquable pour aller au groupe suivant(">" par défaut)
+	- etc    : contient le texte séparant le groupe actuel de la première et de la dernière page ("..." par défaut)
+	- margin : texte inséré avant et après chaque n° de page (vide par défaut) 
+	- margin-left  : texte inséré avant chaque n° de page (vide par défaut) 
+	- margin-right : texte inséré après chaque n° de page (vide par défaut) 
+
+Exemple :
+	{{tpl:PaginationLinks jump="9" before="<<" after=">>" etc="=="}}
+
+Remarques :
+	- il est préférable d'affecter un nombre entier impair à "jump" afin d'avoir une symétrie d'affichage de part et d'autre du n° de page courante.
+	- tous les caractères spéciaux contenus dans "before", "after" et "etc" seront convertis en entités HTML. Par exemple "<a>" deviendra "&lt;a&gt;".
+
+=============
+
+Outre {{tpl:PaginationLinks}}, mrvbPagination met à disposition les marqueurs de template suivants :
+
+<tpl:IfFirstPage>
+	affiche ce qui est placé entre <tpl:IfFirstPage> et </tpl:IfFirstPage> seulement dans le contexte d'une première page.
+<tpl:IfLastPage>
+	affiche ce qui est placé entre <tpl:IfLastPage> et </tpl:IfLastPage> seulement dans le contexte d'une dernière page.
+<tpl:IfMoreOnePage>
+	affiche ce qui est placé entre <tpl:IfMoreOnePage> et </tpl:IfMoreOnePage> seulement s'il y a plus d'une page.
+<tpl:IfOnlyOnePage>
+	affiche ce qui est placé entre <tpl:IfOnlyOnePage> et </tpl:IfOnlyOnePage> seulement s'il y a une seule page.
+<tpl:IfOtherPage>
+	affiche ce qui est placé entre <tpl:IfOtherPage> et </tpl:IfOtherPage> seulement dans le contexte d'une autre page que la première ou la dernière.
+{{tpl:LastPageRank}}
+	retourne le rang de la dernière page.
+{{tpl:NumberOfEntries}}
+	retourne le nombre d'entrées.
+{{tpl:PageAfterURL}}
+	retourne l'URL de la page qui suit la page courante. Si la page courante est la dernière, alors retourne son URL.
+{{tpl:PageBeforeURL}}
+	retourne l'URL de la page qui précéde la page courante. Si la page courante est la première, alors retourne son URL.
+{{tpl:ThisPageRank}}
+	retourne le rang de la page courante.
+
+Remarques :
+- ces marqueurs ne sont fonctionnels et pertinents que s'ils sont utilisés dans une boucle <tpl:Entries>
+- <tpl:IfFirstPage>, <tpl:IfLastPage> n'affichent quelque chose que s'il y a au moins deux pages.
+- <tpl:IfOtherPage> n'affiche quelque chose que s'il y a au moins trois pages.
+
+=============
+
+CSS :
+	- le n° de la première page est affecté de la classe "first"
+	- le n° de la dernière page est affecté de la classe "last"
+	- les autres pages sont affectés de la classe "other"
+
+	- les n° de page impairs sont affectés de la classe "odd"
+	- les n° de page pairs sont affectés de la classe "even"
+
+	- le groupe de lien pour accéder aux "x" pages précédentes est affecté de la classe "before"
+	- le groupe de lien pour accéder aux "x" pages suivantes "après" est affecté de la classe "after"
+
+	- le n° de la page courante est affecté de la classe "this"
+
+	- le texte séparant le bloc actuel des premières et dernières page (cf paramètre "etc") est dans un <span class="etc"></span>
+
+=============
