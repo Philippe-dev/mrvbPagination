@@ -18,9 +18,9 @@ $this->registerModule(
     'mrvbPagination',           					// Name
     'Advanced Pagination Links', 					// Description
     'Fix + Topaz + Mirovinben',   					// Authors
-    '1.3.2',                   						// Version
+    '1.4',                   						// Version
     [
-        'requires' => [['core', '2.10']],   		// Dependencies
+        'requires' => [['core', '2.24']],   		// Dependencies
         'permissions' => 'usage,contentadmin', 		// Permissions
         'type' => 'plugin',             	    	// Type
         'support' => 'https://www.mirovinben.fr/blog/index.php?post/id1562',

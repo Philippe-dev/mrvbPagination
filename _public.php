@@ -14,18 +14,18 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-$core->tpl->addValue('PaginationLinks', ['mrvbPaginationTpl', 'PaginationLinks']);
+dcCore::app()->tpl->addValue('PaginationLinks', ['mrvbPaginationTpl', 'PaginationLinks']);
 
-$core->tpl->addBlock('IfFirstPage', ['mrvbPaginationTpl', 'IfFirstPage']);
-$core->tpl->addBlock('IfMoreOnePage', ['mrvbPaginationTpl', 'IfMoreOnePage']);
-$core->tpl->addBlock('IfOnlyOnePage', ['mrvbPaginationTpl', 'IfOnlyOnePage']);
-$core->tpl->addBlock('IfOtherPage', ['mrvbPaginationTpl', 'IfOtherPage']);
-$core->tpl->addBlock('IfLastPage', ['mrvbPaginationTpl', 'IfLastPage']);
-$core->tpl->addValue('LastPageRank', ['mrvbPaginationTpl', 'LastPageRank']);
-$core->tpl->addValue('NumberOfEntries', ['mrvbPaginationTpl', 'NumberOfEntries']);
-$core->tpl->addValue('PageAfterURL', ['mrvbPaginationTpl', 'PageAfterURL']);
-$core->tpl->addValue('PageBeforeURL', ['mrvbPaginationTpl', 'PageBeforeURL']);
-$core->tpl->addValue('ThisPageRank', ['mrvbPaginationTpl', 'ThisPageRank']);
+dcCore::app()->tpl->addBlock('IfFirstPage', ['mrvbPaginationTpl', 'IfFirstPage']);
+dcCore::app()->tpl->addBlock('IfMoreOnePage', ['mrvbPaginationTpl', 'IfMoreOnePage']);
+dcCore::app()->tpl->addBlock('IfOnlyOnePage', ['mrvbPaginationTpl', 'IfOnlyOnePage']);
+dcCore::app()->tpl->addBlock('IfOtherPage', ['mrvbPaginationTpl', 'IfOtherPage']);
+dcCore::app()->tpl->addBlock('IfLastPage', ['mrvbPaginationTpl', 'IfLastPage']);
+dcCore::app()->tpl->addValue('LastPageRank', ['mrvbPaginationTpl', 'LastPageRank']);
+dcCore::app()->tpl->addValue('NumberOfEntries', ['mrvbPaginationTpl', 'NumberOfEntries']);
+dcCore::app()->tpl->addValue('PageAfterURL', ['mrvbPaginationTpl', 'PageAfterURL']);
+dcCore::app()->tpl->addValue('PageBeforeURL', ['mrvbPaginationTpl', 'PageBeforeURL']);
+dcCore::app()->tpl->addValue('ThisPageRank', ['mrvbPaginationTpl', 'ThisPageRank']);
 
 class mrvbPaginationTpl
 {
@@ -86,15 +86,15 @@ class mrvbPaginationTpl
 				}
 			}
 		}
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
-		if ($_ctx->exists("pagination")) {
-			$nb_posts = $_ctx->pagination->f(0);
+		if (dcCore::app()->ctx->exists("pagination")) {
+			$nb_posts = dcCore::app()->ctx->pagination->f(0);
 		}
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		$nb_max_pages = 10;
@@ -133,13 +133,13 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		if (($current == 1) && ($nb_pages > 1)){ ?>' .
@@ -151,8 +151,8 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		if ($nb_pages > 1){ ?>' .
@@ -164,8 +164,8 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		if ($nb_pages == 1){ ?>' .
@@ -177,13 +177,13 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		if (($current > 1) && ($current < $nb_pages)){ ?>' .
@@ -195,13 +195,13 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		if (($current == $nb_pages) && ($nb_pages > 1)){ ?>' .
@@ -213,13 +213,13 @@ class mrvbPaginationTpl
     {
         return
         '<?php 
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		echo($nb_pages);
@@ -230,7 +230,7 @@ class mrvbPaginationTpl
     {
         return
         '<?php 
-		$nb_posts = $_ctx->pagination->f(0);
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
 		echo($nb_posts);
 		?>';
     }
@@ -239,13 +239,13 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
-		$nb_posts = $_ctx->pagination->f(0);
-		$nb_per_page = $_ctx->post_params["limit"][1];
+		$nb_posts = dcCore::app()->ctx->pagination->f(0);
+		$nb_per_page = dcCore::app()->ctx->post_params["limit"][1];
 		if (!isset($nb_per_page)) $nb_per_page = 1;
 		$nb_pages = ceil($nb_posts/$nb_per_page);
 		$args = $_SERVER["URL_REQUEST_PART"];
@@ -267,8 +267,8 @@ class mrvbPaginationTpl
     {
         return
         '<?php
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
@@ -291,8 +291,8 @@ class mrvbPaginationTpl
     {
         return
         '<?php 
-		if (isset($GLOBALS["_page_number"])) {
-			$current = $GLOBALS["_page_number"];
+		if (dcCore::app()->public->getPageNumber() !== null) {
+			$current = dcCore::app()->public->getPageNumber();
 		} else {
 			$current = 1;
 		}
