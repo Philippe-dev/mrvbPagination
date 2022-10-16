@@ -15,14 +15,14 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    'mrvbPagination',           					// Name
-    'Advanced Pagination Links', 					// Description
-    'Fix + Topaz + Mirovinben',   					// Authors
-    '1.4',                   						// Version
+    'mrvbPagination',
+    'Advanced Pagination Links',
+    'Fix + Topaz + Mirovinben',
+    '1.4',
     [
-        'requires' => [['core', '2.24']],   		// Dependencies
-        'permissions' => 'usage,contentadmin', 		// Permissions
-        'type' => 'plugin',             	    	// Type
+        'requires' => [['core', '2.24']],
+        'permissions' => dcCore::app()->auth->makePermissions([dcAuth::PERMISSION_CONTENT_ADMIN]),
+        'type' => 'plugin',
         'support' => 'https://www.mirovinben.fr/blog/index.php?post/id1562',
         'details' => 'https://plugins.dotaddict.org/dc2/details/mrvbPagination'
     ]
