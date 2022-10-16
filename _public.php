@@ -9,7 +9,6 @@
  *
  * @copyright GPL-2.0 [https://www.gnu.org/licenses/gpl-2.0.html]
  */
-
 if (!defined('DC_RC_PATH')) {
     return;
 }
@@ -31,7 +30,7 @@ class mrvbPaginationTpl
 {
     public static function PaginationLinks($attr)
     {
-        $j = intval(isset($attr['jump']) ? $attr['jump'] : '7');
+        $j = intval($attr['jump'] ?? '7');
         $b = html::escapeHTML(isset($attr['before']) ? __($attr['before']) : '<');
         $a = html::escapeHTML(isset($attr['after']) ? __($attr['after']) : '>');
         $e = html::escapeHTML(isset($attr['etc']) ? __($attr['etc']) : '...');
@@ -126,6 +125,7 @@ class mrvbPaginationTpl
 			echo mrvbAffBlocPage($nb_pages,$nb_pages,$quick_distance,$nb_pages);
 		} 
 		?>';
+
         return $p;
     }
 
